@@ -1,0 +1,22 @@
+#open the php tag
+<?php
+#attempt to establish a connection to the database
+$link = mysqli_connect("localhost", "root", "root", "demo");
+ #check if the connection failed
+if($link === false){
+#if it did, die kill the connect and then prints an error saying it could not connect
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+#close the if statement
+}
+#this is the SQL query saved as a variable to be used later
+$sql = "INSERT INTO persons (first_name, last_name, email_address) VALUES ('Wormy', 'VonWormenstein', 'email@email.com')";
+#if/esle statement to test if the query can be made successfully
+if(mysqli_query($link, $sql)){
+    echo "Records added successfully.";
+#if the query did not work, the server would return an error
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+#closes the connection, the task has been carried out and the connection is closed for security purposes
+mysqli_close($link);
+?>
