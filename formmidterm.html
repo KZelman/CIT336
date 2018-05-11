@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Record Form</title>
+<style>
+  form				
+  {
+    font-family: Arial;
+    color: black;
+    background-color:#9bf442;
+    text-align: center;
+  }
+  
+  </style>
+ 
+</head>
+<body>
+<form method="post">   <!-- creating the form itself -->
+    <p>
+      <br>
+      <h2>
+  School Assignments</h2>				<!-- header -->
+        
+        <label for="course">Course:</label>			<!-- entry box for Course -->
+        <input type="text" name="course" id="course">
+    </p>
+    <p>
+        <label for="assignment">Assignment:</label>		<!-- entry box for Assignments-->
+        <input type="text" name="assignment" id="assignment">
+    </p>
+    <p>
+        <label for="dueDate">Due Date:</label>				<!-- entry box for dueDate-->
+        <input type="text" name="dueDate" id="dueDate" value="mm/dd/yyyy">
+    </p>
+    <input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+<p id=”submitted></p>
+   <script>			<!-- AJAX FUNCTION TO CONNECT TO DB-->
+function addtoDB() {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("submitted").innerHTML = "form submitted";
+    }
+  };
+  var course = document.getElementById('course').value;
+   var assignment = document.getElementById('assignment').value;
+   var dueDate = document.getElementById('dueDate').value;
+   var queryString = "?course=" + course ;
+	queryString +=  "&assignment" + assignment + "&dueDate=" + dueDate;
+   console.log(queryString);
+   xhttp.open("GET", "formmidterm.php" + queryString, true);
+   xhttp.send(null); 
+
+}
+  </script></body>
+</html>
+
